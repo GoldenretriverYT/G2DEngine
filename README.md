@@ -10,4 +10,5 @@ Whilst it probably wouldn't be hard, considering Silk.NET and SkiaSharp already 
 for linux might work without any changes, but any issues related to this are currently not the priority.
 
 ### Note
-As for almost all my projects, this is just a project I started for fun. It is not supposed to become one of the big engines and I can't gurantee that I will maintain it forever.
+As for almost all my projects, this is just a project I started for fun. It is not supposed to become one of the big engines and I can't gurantee that I will maintain it forever.<br><br>
+And yes, G2D is slightly inspired by Unitys GameObject/Components/Transform architecture.
