@@ -11,4 +11,8 @@
     <ProjectReference Include="..\G2DEngine.Runtime\G2DEngine.Runtime.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="mkdir $(ProjectDir)bin\Debug\net6.0\Content&#xD;&#xA;copy $(ProjectDir)Content $(ProjectDir)bin\Debug\net6.0\Content" />
+  </Target>
+
 </Project>
