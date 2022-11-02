@@ -33,30 +33,32 @@ namespace G2DEngine.Runtime.CoreComponents
             paint.Color = SKColors.Yellow;
             Game.Canvas.DrawCircle(centerPoint, GameObject.ObjectId, paint);
 
-            if (Transform.Position.X >= centerPoint.X)
+            if (Transform.CenterPoint.X >= centerPoint.X)
             {
                 var currentObjOffset = Math.Abs(Transform.Position.X - centerPoint.X);
-                var offX = new Vector2((collision.Transform.ComputedSize.X / 2) - currentObjOffset, 0);
+                var offX = new Vector2((collision.Transform.ComputedSize.X / 2) - currentObjOffset + 1, 0);
                 Console.WriteLine(offX.X);
                 this.Transform.Position += offX;
             }
-            else if (this.Transform.Position.X < centerPoint.X)
+            else if (Transform.CenterPoint.X <= centerPoint.X)
             {
                 var currentObjOffset = Math.Abs(Transform.Position.X - centerPoint.X);
-                var offX = new Vector2(-((collision.Transform.ComputedSize.X / 2) - currentObjOffset), 0);
+                var offX = new Vector2(-((collision.Transform.ComputedSize.X / 2) - currentObjOffset + 1), 0);
                 Console.WriteLine(offX.X);
                 this.Transform.Position -= offX;
-            }else if (Transform.Position.Y >= centerPoint.Y)
+            }
+            
+            if (Transform.CenterPoint.Y >= centerPoint.Y)
             {
                 var currentObjOffset = Math.Abs(Transform.Position.Y - centerPoint.Y);
-                var offY = new Vector2((collision.Transform.ComputedSize.Y / 2) - currentObjOffset, 0);
+                var offY = new Vector2(0, (collision.Transform.ComputedSize.Y / 2) - currentObjOffset + 1);
                 Console.WriteLine(offY.Y);
                 this.Transform.Position += offY;
             }
-            else if (this.Transform.Position.Y < centerPoint.Y)
+            else if (Transform.CenterPoint.Y <= centerPoint.Y)
             {
                 var currentObjOffset = Math.Abs(Transform.Position.Y - centerPoint.Y);
-                var offY = new Vector2(-((collision.Transform.ComputedSize.Y / 2) - currentObjOffset), 0);
+                var offY = new Vector2(0, -((collision.Transform.ComputedSize.Y / 2) - currentObjOffset + 1));
                 Console.WriteLine(offY.Y);
                 this.Transform.Position -= offY;
             }

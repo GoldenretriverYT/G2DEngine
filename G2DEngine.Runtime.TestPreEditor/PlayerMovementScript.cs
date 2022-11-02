@@ -32,6 +32,13 @@ namespace G2DEngine.Runtime.TestPreEditor {
             if (Input.GetKey(Silk.NET.Input.Key.S)) {
                 boxCollider.MoveIfFree(new Vector2(0, (movementSpeed * Time.deltaTime)));
             }
+
+            if(Input.GetKey(Silk.NET.Input.Key.R))
+            {
+                Transform.Position = Game.ActiveScene.GameObjects[1].Transform.Position + new Vector2(0, 25);
+            }
+
+            Console.WriteLine(Transform.Position.X + " " + Transform.Position.Y);
         }
     }
 }

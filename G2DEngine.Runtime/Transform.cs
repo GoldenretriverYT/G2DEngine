@@ -14,6 +14,9 @@ namespace G2DEngine.Runtime {
         [JsonIgnore]
         public SKRect Bounds => new(Position.X, Position.Y, Position.X + ComputedSize.X, Position.Y + ComputedSize.Y);
 
+        [JsonIgnore]
+        public Vector2 CenterPoint => new(Position.X + (ComputedSize.X / 2), Position.Y + (ComputedSize.Y / 2));
+
         /// <summary>
         /// Exact size of rendered object in pixels.
         /// 
