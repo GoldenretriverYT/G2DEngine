@@ -1,4 +1,5 @@
 ﻿using G2DEngine.Runtime.Utils;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,25 @@ namespace G2DEngine.Runtime.CoreComponents {
             }
 
             return null;
+        }
+
+        public void ResolveCollision()
+        {
+            var collision = GetCollision();
+
+            if (collision == null) return;
+
+            var centerPoint = new Vector2(collision.Transform.Position.X + (collision.Transform.ComputedSize.X / 2), collision.Transform.Position.Y + (collision.Transform.ComputedSize.Y / 2));
+            var paint = new SKPaint();
+            paint.Color = SKColors.Yellow;
+            Game.Canvas.DrawCircle(centerPoint, 3, paint);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            ResolveCollision();
         }
 
         public void MoveIfFree(Vector2 movement) {

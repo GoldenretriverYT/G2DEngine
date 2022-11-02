@@ -14,7 +14,7 @@ namespace G2DEngine.Runtime.TestPreEditor {
             obj.AddComponent(new PlayerMovementScript());
             obj.AddComponent(new BoxCollider());
             obj.Transform.Scale = new Vector2(0.3f, 0.2f);
-            obj.Transform.Position = new Vector2(200, 200);
+            obj.Transform.Position = new Vector2(0, 0);
 
             var obj2 = GameObject.Instantiate();
             var textureObj2 = new Texture2D("wall.png");
