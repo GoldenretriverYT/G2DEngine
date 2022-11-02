@@ -35,7 +35,7 @@ namespace G2DEngine.Runtime {
             options.Title = "Game";
             options.PreferredStencilBufferBits = 8;
             options.PreferredBitDepth = new Vector4D<int>(8, 8, 8, 8);
-            options.VSync = false;
+            options.VSync = true;
             GlfwWindowing.Use();
 
             window = Window.Create(options);
@@ -67,6 +67,11 @@ namespace G2DEngine.Runtime {
 
                 foreach(var obj in ActiveScene.GameObjects) {
                     obj.Update();
+                }
+
+                foreach(var obj in ActiveScene.GameObjects)
+                {
+                    obj.LateUpdate();
                 }
 
                 Canvas.Flush();

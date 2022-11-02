@@ -13,8 +13,9 @@ namespace G2DEngine.Runtime.TestPreEditor {
             obj.AddComponent(spriteRenderer);
             obj.AddComponent(new PlayerMovementScript());
             obj.AddComponent(new BoxCollider());
+            obj.AddComponent(new PhysicsObject());
             obj.Transform.Scale = new Vector2(0.3f, 0.2f);
-            obj.Transform.Position = new Vector2(0, 0);
+            obj.Transform.Position = new Vector2(225, 270);
 
             var obj2 = GameObject.Instantiate();
             var textureObj2 = new Texture2D("wall.png");
@@ -23,6 +24,7 @@ namespace G2DEngine.Runtime.TestPreEditor {
             obj2.AddComponent(spriteRendererObj2);
             obj2.AddComponent(new BoxCollider());
             obj2.Transform.Scale = new Vector2(0.2f, 0.2f);
+            obj2.Transform.Position = new Vector2(200, 200);
 
             scene.GameObjects.Add(obj);
             scene.GameObjects.Add(obj2);

@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace G2DEngine.Runtime.CoreComponents {
-    public class BoxCollider : G2DScript {
-        public GameObject GetCollision() {
+    public class BoxCollider : Collider {
+        public override GameObject GetCollision() {
             IEnumerable<GameObject> gameObjects = Game.ActiveScene.GameObjects.Flatten();
 
             foreach(var obj in gameObjects) {
@@ -24,23 +24,18 @@ namespace G2DEngine.Runtime.CoreComponents {
             return null;
         }
 
-        public void ResolveCollision()
-        {
-            var collision = GetCollision();
-
-            if (collision == null) return;
-
-            var centerPoint = new Vector2(collision.Transform.Position.X + (collision.Transform.ComputedSize.X / 2), collision.Transform.Position.Y + (collision.Transform.ComputedSize.Y / 2));
-            var paint = new SKPaint();
-            paint.Color = SKColors.Yellow;
-            Game.Canvas.DrawCircle(centerPoint, 3, paint);
-        }
-
         public override void Update()
         {
             base.Update();
+        }
 
-            ResolveCollision();
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+            var centerPoint = new Vector2(Transform.Position.X + (Transform.ComputedSize.X / 2), Transform.Position.Y + (Transform.ComputedSize.Y / 2));
+            var paint = new SKPaint();
+            paint.Color = SKColors.Yellow;
+            Game.Canvas.DrawCircle(centerPoint, 3, paint);
         }
 
         public void MoveIfFree(Vector2 movement) {

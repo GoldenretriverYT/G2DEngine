@@ -49,6 +49,11 @@ namespace G2DEngine.Runtime {
             foreach (var component in components) component.Update();
         }
 
+        public void LateUpdate()
+        {
+            foreach(var component in components) component.LateUpdate();
+        }
+
         public void Start() {
             hasBeenStarted = true;
             foreach (var component in components) component.Start(this);

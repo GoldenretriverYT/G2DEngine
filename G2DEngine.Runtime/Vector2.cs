@@ -16,5 +16,7 @@ namespace G2DEngine.Runtime {
 
         public static implicit operator SkiaSharp.SKPoint(Vector2 vec) => new(vec.X, vec.Y);
         public static Vector2 operator +(Vector2 l, Vector2 r) => new(l.X + r.X, l.Y + r.Y);
+        public static Vector2 operator -(Vector2 l, Vector2 r) => new(l.X - r.X, l.Y - r.Y);
+
     }
 }
