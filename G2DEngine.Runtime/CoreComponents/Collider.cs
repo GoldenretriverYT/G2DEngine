@@ -9,5 +9,6 @@ namespace G2DEngine.Runtime.CoreComponents
     public abstract class Collider : G2DScript
     {
         public abstract GameObject GetCollision();
+        public float Bounciness { get; set; } = 3f;
     }
 }

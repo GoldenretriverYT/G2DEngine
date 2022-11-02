@@ -14,7 +14,7 @@ namespace G2DEngine.Runtime.TestPreEditor {
             obj.AddComponent(new PlayerMovementScript());
             obj.AddComponent(new BoxCollider());
             obj.AddComponent(new PhysicsObject());
-            obj.Transform.Scale = new Vector2(0.3f, 0.2f);
+            obj.Transform.Scale = new Vector2(0.03f, 0.02f);
             obj.Transform.Position = new Vector2(225, 270);
 
             var obj2 = GameObject.Instantiate();
