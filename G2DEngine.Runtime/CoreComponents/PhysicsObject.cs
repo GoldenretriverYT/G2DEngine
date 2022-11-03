@@ -73,21 +73,21 @@ namespace G2DEngine.Runtime.CoreComponents
             // todo: impact on corner
             if(Math.Abs(absDx-absDy) < 0.01f)
             {
-                Console.WriteLine("Corner hit");
+                //Console.WriteLine("Corner hit");
                 if(dx < 0)
                 {
-                    Transform.Position = new Vector2(collision.Transform.Bounds.Right, Transform.Position.Y);
+                    Transform.Position = new Vector2(collision.Transform.Bounds.Right + 1, Transform.Position.Y);
                 }else
                 {
-                    Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X, Transform.Position.Y);
+                    Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X - 1, Transform.Position.Y);
                 }
 
                 if(dy < 0)
                 {
-                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Bottom);
+                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Bottom + 1);
                 }else
                 {
-                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y);
+                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y - 1);
                 }
 
                 if(rnd.NextDouble() < 0.5d)
@@ -99,26 +99,26 @@ namespace G2DEngine.Runtime.CoreComponents
                 }
             }else if(absDx > absDy)
             {
-                Console.WriteLine("side hit");
+                //Console.WriteLine("side hit");
                 if(dx < 0)
                 {
-                    Transform.Position = new Vector2(collision.Transform.Bounds.Right, Transform.Position.Y);
+                    Transform.Position = new Vector2(collision.Transform.Bounds.Right + 1, Transform.Position.Y);
                 }else
                 {
-                    Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X, Transform.Position.Y);
+                    Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X - 1, Transform.Position.Y);
                 }
 
                 collisionPhysic?.AddForce(new Vector2(Velocity.X * ((Mass / collisionPhysic.Mass)), 0));
                 Velocity = new(-Velocity.X * collisionCollider.Bounciness, Velocity.Y);
             }else
             {
-                Console.WriteLine("top/bottom hit");
+                //Console.WriteLine("top/bottom hit");
                 if (dy < 0)
                 {
-                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Bottom);
+                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Bottom + 1);
                 }else
                 {
-                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y);
+                    Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y - 1);
                 }
 
                 collisionPhysic?.AddForce(new Vector2(0, Velocity.Y * ((Mass / collisionPhysic.Mass))));
@@ -146,19 +146,19 @@ namespace G2DEngine.Runtime.CoreComponents
             var paint = new SKPaint(font);
             paint.Color = SKColors.Red;
 
-            dbgVelocityHist.Add(Velocity);
+            //dbgVelocityHist.Add(Velocity);
 
-            if (dbgVelocityHist.Count > 150) dbgVelocityHist.RemoveAt(0);
+            //if (dbgVelocityHist.Count > 150) dbgVelocityHist.RemoveAt(0);
 
             int idx = 0;
 
-            foreach (var value in dbgVelocityHist)
-            {
-                Game.Canvas.DrawCircle(new SKPoint(idx*5, 100-value.X*2), 5, paint);
-                idx++;
-            }
+            //foreach (var value in dbgVelocityHist)
+            //{
+            //    Game.Canvas.DrawCircle(new SKPoint(idx*5, 100-value.X*2), 5, paint);
+            //    idx++;
+            //}
 
-            Game.Canvas.DrawText(Velocity.ToString(), new SKPoint(0, 16), paint);
+            //Game.Canvas.DrawText(Velocity.ToString(), new SKPoint(0, 16), paint);
         }
 
         public void AddForce(Vector2 force)

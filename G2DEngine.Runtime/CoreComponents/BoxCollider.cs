@@ -19,7 +19,7 @@ namespace G2DEngine.Runtime.CoreComponents {
         }
 
         public override GameObject GetCollision() {
-            IEnumerable<GameObject> gameObjects = Game.ActiveScene.GameObjects.Flatten();
+            IEnumerable<GameObject> gameObjects = Collider.GetFlattenedGameObjects();
 
             foreach(var obj in gameObjects) {
                 if (obj.ObjectId == GameObject.ObjectId) continue;
@@ -36,16 +36,16 @@ namespace G2DEngine.Runtime.CoreComponents {
 
         public override void Update()
         {
-            base.Update();
+            
         }
 
         public override void LateUpdate()
         {
-            base.LateUpdate();
-            var centerPoint = new Vector2(Transform.Position.X + (Transform.ComputedSize.X / 2), Transform.Position.Y + (Transform.ComputedSize.Y / 2));
-            var paint = new SKPaint();
-            paint.Color = SKColors.Yellow;
-            Game.Canvas.DrawCircle(centerPoint, 3, paint);
+            
+            //var centerPoint = new Vector2(Transform.Position.X + (Transform.ComputedSize.X / 2), Transform.Position.Y + (Transform.ComputedSize.Y / 2));
+            //var paint = new SKPaint();
+            //paint.Color = SKColors.Yellow;
+            //Game.Canvas.DrawCircle(centerPoint, 3, paint);
         }
 
         public void MoveIfFree(Vector2 movement) {

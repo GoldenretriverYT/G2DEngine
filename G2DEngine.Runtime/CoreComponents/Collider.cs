@@ -1,4 +1,5 @@
-﻿using System;
+﻿using G2DEngine.Runtime.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,19 @@ namespace G2DEngine.Runtime.CoreComponents
     {
         public abstract GameObject GetCollision();
         public float Bounciness { get; set; } = 0.01f;
+
+        private static IEnumerable<GameObject> flattenedGameObjects = new List<GameObject>();
+        private static long lastFlattenedUpdateFrame = 0;
+
+        public static IEnumerable<GameObject> GetFlattenedGameObjects()
+        {
+            if(Game.CurrentFrame != lastFlattenedUpdateFrame)
+            {
+                flattenedGameObjects = Game.ActiveScene.GameObjects.Flatten();
+                lastFlattenedUpdateFrame = Game.CurrentFrame;
+            }
+
+            return flattenedGameObjects;
+        }
     }
 }

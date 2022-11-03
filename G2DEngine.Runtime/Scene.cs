@@ -20,14 +20,16 @@ namespace G2DEngine.Runtime {
 
             Scene s = JsonConvert.DeserializeObject<Scene>(File.ReadAllText("Content/" + path), new JsonSerializerSettings() {
                 TypeNameHandling = TypeNameHandling.Auto,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ObjectCreationHandling = ObjectCreationHandling.Replace,
             });
             return s;
         }
 
         public string Serialize() => JsonConvert.SerializeObject(this, Formatting.Indented, new JsonSerializerSettings {
             TypeNameHandling = TypeNameHandling.Auto,
-            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                ObjectCreationHandling = ObjectCreationHandling.Replace,
         });
         public static string Serialize(Scene s) => s.Serialize();
     }

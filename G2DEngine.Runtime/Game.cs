@@ -17,6 +17,8 @@ namespace G2DEngine.Runtime {
         private static Stopwatch stopwatch = new();
         private static List<double> lastFrameTimes = new();
 
+        public static long CurrentFrame { get; private set; } = 0;
+
         public static SKCanvas Canvas { get; private set; }
 
         public static SKColor BackgroundColor { get; set; } = SKColors.CornflowerBlue;
@@ -24,14 +26,16 @@ namespace G2DEngine.Runtime {
 
         public static List<Key> CurrentlyPressedKeys { get; private set; } = new();
 
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        public static void Start(Scene startScene) {
+        public static void Start(Scene startScene, Vector2 resolution) {
+            Start(startScene, (int)resolution.X, (int)resolution.Y);
+        }
+
+        public static void Start(Scene startScene, int resW = 800, int resH = 600)
+        {
             ActiveScene = startScene;
 
             var options = WindowOptions.Default;
-            options.Size = new Vector2D<int>(800, 600);
+            options.Size = new Vector2D<int>(resW, resH);
             options.Title = "Game";
             options.PreferredStencilBufferBits = 8;
             options.PreferredBitDepth = new Vector4D<int>(8, 8, 8, 8);
@@ -51,43 +55,64 @@ namespace G2DEngine.Runtime {
             grGlInterface.Validate();
 
             grContext = GRContext.CreateGl(grGlInterface);
-            renderTarget = new GRBackendRenderTarget(800, 600, 0, 8, new GRGlFramebufferInfo(0, 0x8058)); // 0x8058 = GL_RGBA8`
+            renderTarget = new GRBackendRenderTarget(resW, resH, 0, 8, new GRGlFramebufferInfo(0, 0x8058)); // 0x8058 = GL_RGBA8`
             surface = SKSurface.Create(grContext, renderTarget, GRSurfaceOrigin.BottomLeft, SKColorType.Rgba8888);
 
             Canvas = surface.Canvas;
 
-            foreach (var obj in ActiveScene.GameObjects) {
+            foreach (var obj in ActiveScene.GameObjects)
+            {
                 obj.Start();
             }
 
-            window.Render += d =>
-            {
-                grContext.ResetContext();
-                Canvas.Clear(BackgroundColor);
-
-                foreach (var obj in ActiveScene.GameObjects)
-                {
-                    obj.EarlyUpdate();
-                }
-
-                foreach (var obj in ActiveScene.GameObjects) {
-                    obj.Update();
-                }
-
-                foreach(var obj in ActiveScene.GameObjects)
-                {
-                    obj.LateUpdate();
-                }
-
-                Canvas.Flush();
-
-                stopwatch.Stop();
-                window.Title = stopwatch.Elapsed.TotalMilliseconds.ToString();
-                Time.deltaTime = (float)(stopwatch.Elapsed.TotalMilliseconds / 1000);
-                stopwatch.Restart();
-            };
-
+            window.Render += GameUpdate;
             window.Run();
+        }
+
+        private static void GameUpdate(double something)
+        {
+            grContext.ResetContext();
+            Canvas.Clear(BackgroundColor);
+
+            CallObjectUpdates();
+
+            Canvas.Flush();
+
+            CalculateDeltaTime();
+        }
+
+        private static void CallObjectUpdates()
+        {
+            foreach (var obj in ActiveScene.GameObjects)
+            {
+                CurrentFrame++;
+                obj.EarlyUpdate();
+            }
+
+            foreach (var obj in ActiveScene.GameObjects)
+            {
+                obj.Update();
+            }
+
+            foreach (var obj in ActiveScene.GameObjects)
+            {
+                obj.LateUpdate();
+            }
+        }
+
+        private static void CalculateDeltaTime()
+        {
+            stopwatch.Stop();
+
+            lastFrameTimes.Add(stopwatch.Elapsed.TotalMilliseconds);
+            if (lastFrameTimes.Count > 100) lastFrameTimes.RemoveAt(0);
+
+            double avgFrametime = (lastFrameTimes.Sum() / lastFrameTimes.Count);
+
+            window.Title = $"Current Frame: {stopwatch.Elapsed.TotalMilliseconds.ToString("0.0")}ms | Average (last 100 frames): {avgFrametime.ToString("0.0")} | FPS: {(1000 / avgFrametime).ToString("0")}";
+
+            Time.deltaTime = (float)(stopwatch.Elapsed.TotalMilliseconds / 1000);
+            stopwatch.Restart();
         }
 
         private static void OnKeyDownHandler(IKeyboard kb, Key key, int arg3) {
