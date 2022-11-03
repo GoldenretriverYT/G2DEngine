@@ -43,6 +43,11 @@ namespace G2DEngine.Runtime.TestPreEditor {
                 Transform.Position = Game.ActiveScene.GameObjects[1].Transform.Position + new Vector2(0, 25);
             }
 
+            if(Input.GetKey(Silk.NET.Input.Key.U))
+            {
+                
+            }
+
             //Console.WriteLine(Transform.Position.X + " " + Transform.Position.Y);
         }
     }
