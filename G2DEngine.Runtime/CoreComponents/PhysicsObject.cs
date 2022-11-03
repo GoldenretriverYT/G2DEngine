@@ -10,6 +10,7 @@ namespace G2DEngine.Runtime.CoreComponents
     public class PhysicsObject : G2DScript
     {
         public Vector2 Velocity { get; set; } = Vector2.Zero;
+        public float Mass { get; set; } = 1f;
 
         private List<Vector2> dbgVelocityHist = new();
 
@@ -30,6 +31,7 @@ namespace G2DEngine.Runtime.CoreComponents
             }
 
             var collisionCollider = collision.GetComponent<Collider>();
+            collision.TryGetComponent<PhysicsObject>(out var collisionPhysic);
 
             /*var centerPoint = new Vector2(collision.Transform.Position.X + (collision.Transform.ComputedSize.X / 2), collision.Transform.Position.Y + (collision.Transform.ComputedSize.Y / 2));
             var paint = new SKPaint();
@@ -68,6 +70,7 @@ namespace G2DEngine.Runtime.CoreComponents
             var absDx = Math.Abs(dx);
             var absDy = Math.Abs(dy);
 
+            // todo: impact on corner
             if(Math.Abs(absDx-absDy) < 0.01f)
             {
                 Console.WriteLine("Corner hit");
@@ -105,6 +108,7 @@ namespace G2DEngine.Runtime.CoreComponents
                     Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X, Transform.Position.Y);
                 }
 
+                collisionPhysic?.AddForce(new Vector2(Velocity.X * ((Mass / collisionPhysic.Mass)), 0));
                 Velocity = new(-Velocity.X * collisionCollider.Bounciness, Velocity.Y);
             }else
             {
@@ -117,6 +121,7 @@ namespace G2DEngine.Runtime.CoreComponents
                     Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y);
                 }
 
+                collisionPhysic?.AddForce(new Vector2(0, Velocity.Y * ((Mass / collisionPhysic.Mass))));
                 Velocity = new(Velocity.X, -Velocity.Y * collisionCollider.Bounciness);
             }
         }

@@ -23,6 +23,7 @@ namespace G2DEngine.Runtime.TestPreEditor {
             spriteRendererObj2.Sprite = textureObj2;
             obj2.AddComponent(spriteRendererObj2);
             obj2.AddComponent(new BoxCollider());
+            obj2.AddComponent(new PhysicsObject());
             obj2.Transform.Scale = new Vector2(0.2f, 0.2f);
             obj2.Transform.Position = new Vector2(200, 200);
 
