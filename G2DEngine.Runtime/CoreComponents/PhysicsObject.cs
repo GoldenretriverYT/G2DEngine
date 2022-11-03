@@ -29,6 +29,8 @@ namespace G2DEngine.Runtime.CoreComponents
                 return;
             }
 
+            var collisionCollider = collision.GetComponent<Collider>();
+
             /*var centerPoint = new Vector2(collision.Transform.Position.X + (collision.Transform.ComputedSize.X / 2), collision.Transform.Position.Y + (collision.Transform.ComputedSize.Y / 2));
             var paint = new SKPaint();
             paint.Color = SKColors.Yellow;
@@ -66,7 +68,7 @@ namespace G2DEngine.Runtime.CoreComponents
             var absDx = Math.Abs(dx);
             var absDy = Math.Abs(dy);
 
-            if(Math.Abs(absDy-absDy) < 0.001f)
+            if(Math.Abs(absDx-absDy) < 0.01f)
             {
                 Console.WriteLine("Corner hit");
                 if(dx < 0)
@@ -87,23 +89,23 @@ namespace G2DEngine.Runtime.CoreComponents
 
                 if(rnd.NextDouble() < 0.5d)
                 {
-                    Velocity = new(-Velocity.X * collider.Bounciness, Velocity.Y);
+                    Velocity = new(-Velocity.X * collisionCollider.Bounciness, Velocity.Y);
                 }else
                 {
-                    Velocity = new(Velocity.X, -Velocity.Y * collider.Bounciness);
+                    Velocity = new(Velocity.X, -Velocity.Y * collisionCollider.Bounciness);
                 }
             }else if(absDx > absDy)
             {
                 Console.WriteLine("side hit");
                 if(dx < 0)
                 {
-                    Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X, Transform.Position.Y);
+                    Transform.Position = new Vector2(collision.Transform.Bounds.Right, Transform.Position.Y);
                 }else
                 {
                     Transform.Position = new Vector2(collision.Transform.Bounds.Left - Transform.ComputedSize.X, Transform.Position.Y);
                 }
 
-                Velocity = new(-Velocity.X * collider.Bounciness, Velocity.Y);
+                Velocity = new(-Velocity.X * collisionCollider.Bounciness, Velocity.Y);
             }else
             {
                 Console.WriteLine("top/bottom hit");
@@ -115,15 +117,15 @@ namespace G2DEngine.Runtime.CoreComponents
                     Transform.Position = new Vector2(Transform.Position.X, collision.Transform.Bounds.Top - Transform.ComputedSize.Y);
                 }
 
-                Velocity = new(Velocity.X, -Velocity.Y * collider.Bounciness);
+                Velocity = new(Velocity.X, -Velocity.Y * collisionCollider.Bounciness);
             }
         }
-        public override void Update()
+        public override void EarlyUpdate()
         {
-            base.Update();
+            base.EarlyUpdate();
             //Console.WriteLine("Update");
-            ResolveCollision();
             ApplyForces();
+            ResolveCollision();
         }
 
         private void ApplyForces()

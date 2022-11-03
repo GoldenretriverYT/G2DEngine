@@ -17,6 +17,8 @@ namespace G2DEngine.Runtime {
         }
 
         public virtual void LateUpdate() { }
+        public virtual void EarlyUpdate() { }
+
 
         public virtual void Start() {
         }

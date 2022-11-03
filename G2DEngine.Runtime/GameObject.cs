@@ -45,6 +45,11 @@ namespace G2DEngine.Runtime {
         [JsonProperty]
         private List<G2DScript> components = new();
 
+        public void EarlyUpdate()
+        {
+            foreach (var component in components) component.EarlyUpdate();
+        }
+
         public void Update() {
             foreach (var component in components) component.Update();
         }

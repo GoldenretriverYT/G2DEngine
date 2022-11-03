@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace G2DEngine.Runtime.CoreComponents {
     public class BoxCollider : Collider {
+        public BoxCollider()
+        {
+
+        }
+
+        public BoxCollider(float bounciness)
+        {
+            this.Bounciness = bounciness;
+        }
+
         public override GameObject GetCollision() {
             IEnumerable<GameObject> gameObjects = Game.ActiveScene.GameObjects.Flatten();
 

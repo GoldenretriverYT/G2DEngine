@@ -65,7 +65,12 @@ namespace G2DEngine.Runtime {
                 grContext.ResetContext();
                 Canvas.Clear(BackgroundColor);
 
-                foreach(var obj in ActiveScene.GameObjects) {
+                foreach (var obj in ActiveScene.GameObjects)
+                {
+                    obj.EarlyUpdate();
+                }
+
+                foreach (var obj in ActiveScene.GameObjects) {
                     obj.Update();
                 }
 
