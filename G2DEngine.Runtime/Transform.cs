@@ -12,7 +12,19 @@ namespace G2DEngine.Runtime {
         public Vector2 Scale { get; set; }
 
         [JsonIgnore]
-        public SKRect Bounds => new(Position.X, Position.Y, Position.X + ComputedSize.X, Position.Y + ComputedSize.Y);
+        public SKRect Bounds { get
+            {
+                if (lastBoundUpdate != Game.CurrentFrame)
+                {
+                    _bounds = new(Position.X, Position.Y, Position.X + ComputedSize.X, Position.Y + ComputedSize.Y);
+                    lastBoundUpdate = Game.CurrentFrame;
+                }
+
+                return _bounds;
+            } }
+
+        private SKRect _bounds;
+        private long lastBoundUpdate = 0;
 
         [JsonIgnore]
         public Vector2 CenterPoint => new(Position.X + (ComputedSize.X / 2), Position.Y + (ComputedSize.Y / 2));

@@ -58,7 +58,7 @@ namespace G2DEngine.Runtime.TestPreEditor
                     spriteRendererObj2.Sprite = wallTex;
                     obj2.AddComponent(spriteRendererObj2);
                     obj2.AddComponent(new BoxCollider());
-                    obj2.AddComponent(new PhysicsObject() { Mass=0.2f});
+                    obj2.AddComponent(new PhysicsObject() { Mass=1f});
                     obj2.Transform.Scale = new Vector2(0.05f, 0.05f);
                     obj2.Transform.Position = new Vector2(300+ (26 * i), 400 + 26 * j);
 
@@ -71,6 +71,14 @@ namespace G2DEngine.Runtime.TestPreEditor
 
             var loadedScene = Scene.FromContentFile("test.scene");
             Console.WriteLine(loadedScene.GameObjects[0].Transform.Scale.X);
+
+            var idsFound = new List<int>();
+
+            foreach(var gObj in loadedScene.GameObjects)
+            {
+                if (idsFound.Contains(gObj.ObjectId)) throw new Exception("rip");
+                idsFound.Add(gObj.ObjectId);
+            }
 
             Game.Start(loadedScene, 1200, 1000);
         }

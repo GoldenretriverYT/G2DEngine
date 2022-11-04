@@ -33,37 +33,6 @@ namespace G2DEngine.Runtime.CoreComponents
             var collisionCollider = collision.GetComponent<Collider>();
             collision.TryGetComponent<PhysicsObject>(out var collisionPhysic);
 
-            /*var centerPoint = new Vector2(collision.Transform.Position.X + (collision.Transform.ComputedSize.X / 2), collision.Transform.Position.Y + (collision.Transform.ComputedSize.Y / 2));
-            var paint = new SKPaint();
-            paint.Color = SKColors.Yellow;
-            Game.Canvas.DrawCircle(centerPoint, GameObject.ObjectId, paint);
-
-            if (Transform.CenterPoint.X >= centerPoint.X)
-            {
-                var currentObjOffset = Math.Abs(Transform.Position.X - centerPoint.X);
-                var offX = new Vector2((collision.Transform.ComputedSize.X / 2) - currentObjOffset + 1, 0);
-                this.Transform.Position += offX;
-            }
-            else if (Transform.CenterPoint.X <= centerPoint.X)
-            {
-                var currentObjOffset = Math.Abs(Transform.Position.X - centerPoint.X);
-                var offX = new Vector2(-((collision.Transform.ComputedSize.X / 2) - currentObjOffset + 1), 0);
-                this.Transform.Position -= offX;
-            }
-            
-            if (Transform.CenterPoint.Y >= centerPoint.Y)
-            {
-                var currentObjOffset = Math.Abs(Transform.Position.Y - centerPoint.Y);
-                var offY = new Vector2(0, (collision.Transform.ComputedSize.Y / 2) - currentObjOffset + 1);
-                this.Transform.Position += offY;
-            }
-            else if (Transform.CenterPoint.Y <= centerPoint.Y)
-            {
-                var currentObjOffset = Math.Abs(Transform.Position.Y - centerPoint.Y);
-                var offY = new Vector2(0, -((collision.Transform.ComputedSize.Y / 2) - currentObjOffset + 1));
-                this.Transform.Position -= offY;
-            }*/
-
             var dx = (collision.Transform.CenterPoint.X - Transform.CenterPoint.X) / (collision.Transform.ComputedSize.X / 2);
             var dy = (collision.Transform.CenterPoint.Y - Transform.CenterPoint.Y) / (collision.Transform.ComputedSize.Y / 2);
 

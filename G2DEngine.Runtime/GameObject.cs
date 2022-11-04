@@ -44,6 +44,8 @@ namespace G2DEngine.Runtime {
 
         [JsonProperty]
         private List<G2DScript> components = new();
+        //[JsonProperty]
+        //private List<Type> componentTypes = new();
 
         public void EarlyUpdate()
         {
@@ -65,8 +67,10 @@ namespace G2DEngine.Runtime {
         }
 
         public T GetComponent<T>() where T : G2DScript {
+            //if (!componentTypes.Contains(typeof(T))) return default(T);
+
             foreach (G2DScript script in components) {
-                if (script is T) return (T)script;
+                if (script is T val) return val;
             }
 
             return default(T);
@@ -75,12 +79,13 @@ namespace G2DEngine.Runtime {
         public bool TryGetComponent<T>(out T component) where T : G2DScript {
             component = GetComponent<T>();
 
-            if (component == default(T)) return false;
+            if (component == null) return false;
             return true;
         }
 
         public void AddComponent(G2DScript component) {
             components.Add(component);
+            //componentTypes.Add(component.GetType());
             component.GameObject = this;
             if(hasBeenStarted) component.Start(); // Only call .Start if gameobject already has been started (so only if the component was added in runtime)
         }

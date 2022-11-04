@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 namespace G2DEngine.Runtime.CoreComponents {
     public class BoxCollider : Collider {
-
-
         public BoxCollider()
         {
 
@@ -26,8 +24,10 @@ namespace G2DEngine.Runtime.CoreComponents {
             foreach(var obj in gameObjects) {
                 if (obj.ObjectId == GameObject.ObjectId) continue;
 
-                if(obj.TryGetComponent<BoxCollider>(out var otherCollider)) {
-                    if(CollisionChecker.IsColliding(Transform.Bounds, otherCollider.Transform.Bounds)) {
+                if (obj.TryGetComponent<BoxCollider>(out var otherCollider))
+                {
+                    if (CollisionChecker.IsColliding(Transform.Bounds, otherCollider.Transform.Bounds))
+                    {
                         return otherCollider.GameObject;
                     }
                 }
