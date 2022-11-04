@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace G2DEngine.Runtime.CoreComponents {
     public class BoxCollider : Collider {
+
+
         public BoxCollider()
         {
 

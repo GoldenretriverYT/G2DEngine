@@ -49,9 +49,9 @@ namespace G2DEngine.Runtime.TestPreEditor
             scene.GameObjects.Add(wallTop);
             scene.GameObjects.Add(wallBottom);
 
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < 12; i++)
             {
-                for (var j = 0; j < 6; j++)
+                for (var j = 0; j < 12; j++)
                 {
                     var obj2 = GameObject.Instantiate();
                     var spriteRendererObj2 = new SpriteRenderer();
