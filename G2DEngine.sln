@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "G2DEngine.Common", "G2DEngi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "G2DEngine.Runtime", "G2DEngine.Runtime\G2DEngine.Runtime.csproj", "{D50DB984-D2C8-4CC5-9687-A29C7B361BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2DEngine.Runtime.TestPreEditor", "G2DEngine.Runtime.TestPreEditor\G2DEngine.Runtime.TestPreEditor.csproj", "{422841D1-2837-4F0C-93D4-062AC8131E50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "G2DEngine.Runtime.TestPreEditor", "G2DEngine.Runtime.TestPreEditor\G2DEngine.Runtime.TestPreEditor.csproj", "{422841D1-2837-4F0C-93D4-062AC8131E50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2DEngine.Runtime.Physics", "G2DEngine.Runtime.Physics\G2DEngine.Runtime.Physics.csproj", "{3366B340-CE49-43E6-8945-5D7B7255F6E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{422841D1-2837-4F0C-93D4-062AC8131E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{422841D1-2837-4F0C-93D4-062AC8131E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{422841D1-2837-4F0C-93D4-062AC8131E50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3366B340-CE49-43E6-8945-5D7B7255F6E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3366B340-CE49-43E6-8945-5D7B7255F6E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3366B340-CE49-43E6-8945-5D7B7255F6E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3366B340-CE49-43E6-8945-5D7B7255F6E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

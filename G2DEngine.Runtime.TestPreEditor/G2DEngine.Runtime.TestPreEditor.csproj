@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\G2DEngine.Runtime.Physics\G2DEngine.Runtime.Physics.csproj" />
     <ProjectReference Include="..\G2DEngine.Runtime\G2DEngine.Runtime.csproj" />
   </ItemGroup>
 

@@ -40,7 +40,7 @@ namespace G2DEngine.Runtime.CoreComponents
             var absDy = Math.Abs(dy);
 
             // todo: impact on corner
-            if(Math.Abs(absDx-absDy) < 0.01f)
+            if(Math.Abs(absDx-absDy) < 0.001f)
             {
                 //Console.WriteLine("Corner hit");
                 if(dx < 0)
@@ -97,37 +97,17 @@ namespace G2DEngine.Runtime.CoreComponents
         public override void EarlyUpdate()
         {
             base.EarlyUpdate();
-            //Console.WriteLine("Update");
             ApplyForces();
             ResolveCollision();
+
         }
 
         private void ApplyForces()
         {
             Transform.Position += Velocity * (Time.deltaTime * 100);
+
             float dividend = Math.Max(1f, (1.001f * (Time.deltaTime * 100)));
-            //Console.WriteLine(dividend);
             Velocity = new Vector2(Velocity.X / dividend, Velocity.Y / dividend);
-            //Console.WriteLine(Velocity);
-
-            var typeface = SKTypeface.FromFamilyName("Arial");
-            var font = new SKFont(typeface, 16);
-            var paint = new SKPaint(font);
-            paint.Color = SKColors.Red;
-
-            //dbgVelocityHist.Add(Velocity);
-
-            //if (dbgVelocityHist.Count > 150) dbgVelocityHist.RemoveAt(0);
-
-            int idx = 0;
-
-            //foreach (var value in dbgVelocityHist)
-            //{
-            //    Game.Canvas.DrawCircle(new SKPoint(idx*5, 100-value.X*2), 5, paint);
-            //    idx++;
-            //}
-
-            //Game.Canvas.DrawText(Velocity.ToString(), new SKPoint(0, 16), paint);
         }
 
         public void AddForce(Vector2 force)
