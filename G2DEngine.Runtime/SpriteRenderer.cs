@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G2DEngine.Runtime.CoreComponents {
+namespace G2DEngine.Runtime {
     public class SpriteRenderer : G2DScript {
         public Texture2D Sprite { get; set; }
 

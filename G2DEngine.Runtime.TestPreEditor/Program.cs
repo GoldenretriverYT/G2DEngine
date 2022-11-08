@@ -1,4 +1,4 @@
-﻿using G2DEngine.Runtime.CoreComponents;
+﻿using G2DEngine.Physics;
 
 namespace G2DEngine.Runtime.TestPreEditor
 {
@@ -49,18 +49,19 @@ namespace G2DEngine.Runtime.TestPreEditor
             scene.GameObjects.Add(wallTop);
             scene.GameObjects.Add(wallBottom);
 
-            for (var i = 0; i < 12; i++)
+            for (var i = 0; i < 32; i++)
             {
-                for (var j = 0; j < 12; j++)
+                if (i % 3 == 0) continue;
+                for (var j = 0; j < 32; j++)
                 {
+                    if (j % 2 == 0) continue;
                     var obj2 = GameObject.Instantiate();
                     var spriteRendererObj2 = new SpriteRenderer();
                     spriteRendererObj2.Sprite = wallTex;
                     obj2.AddComponent(spriteRendererObj2);
                     obj2.AddComponent(new BoxCollider());
-                    obj2.AddComponent(new PhysicsObject() { Mass=1f});
-                    obj2.Transform.Scale = new Vector2(0.05f, 0.05f);
-                    obj2.Transform.Position = new Vector2(300+ (26 * i), 400 + 26 * j);
+                    obj2.Transform.Scale = new Vector2(0.01f, 0.01f);
+                    obj2.Transform.Position = new Vector2(50 + (3 * i), 200 + 3 * j);
 
                     scene.GameObjects.Add(obj2);
                 }

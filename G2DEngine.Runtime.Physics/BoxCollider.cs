@@ -28,10 +28,19 @@ namespace G2DEngine.Physics
 
                 if (obj.TryGetComponent<BoxCollider>(out var otherCollider))
                 {
+
                     if (CollisionChecker.IsColliding(Transform.Bounds, otherCollider.Transform.Bounds))
                     {
                         return otherCollider.GameObject;
                     }
+
+                    /*var rect1 = Transform.Bounds;
+                    var rect2 = otherCollider.Transform.Bounds;
+
+                    if ((rect1.Right >= rect2.Left &&
+                      rect1.Left <= rect2.Right &&
+                      rect1.Bottom >= rect2.Top &&
+                      rect1.Top <= rect2.Bottom)) return otherCollider.GameObject;*/
                 }
             }
 

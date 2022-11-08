@@ -17,8 +17,10 @@ namespace G2DEngine.Physics
 
         private static Random rnd = new();
 
-        public void ResolveCollision()
+        public void ResolveCollision(int resolvingDepth = 0)
         {
+            if (resolvingDepth > 10) return;
+
             if (!GameObject.TryGetComponent<Collider>(out var collider))
             {
                 return;
@@ -94,6 +96,8 @@ namespace G2DEngine.Physics
                 collisionPhysic?.AddForce(new Vector2(0, Velocity.Y * ((Mass / collisionPhysic.Mass))));
                 Velocity = new(Velocity.X, -Velocity.Y * collisionCollider.Bounciness);
             }
+
+            //ResolveCollision(resolvingDepth+1);
         }
         public override void EarlyUpdate()
         {
