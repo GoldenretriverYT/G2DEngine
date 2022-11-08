@@ -1,11 +1,12 @@
-﻿using G2DEngine.Runtime.Utils;
+﻿using G2DEngine.Runtime;
+using G2DEngine.Runtime.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G2DEngine.Runtime.CoreComponents
+namespace G2DEngine.Physics
 {
     public abstract class Collider : G2DScript
     {

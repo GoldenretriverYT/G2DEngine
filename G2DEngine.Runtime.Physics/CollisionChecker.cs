@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G2DEngine.Runtime {
+namespace G2DEngine.Physics
+{
     public static class CollisionChecker {
         public static bool IsColliding(SKRect rect1, SKRect rect2) {
             return (rect1.Right >= rect2.Left &&

@@ -1,11 +1,12 @@
-﻿using SkiaSharp;
+﻿using G2DEngine.Runtime;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G2DEngine.Runtime.CoreComponents
+namespace G2DEngine.Physics
 {
     public class PhysicsObject : G2DScript
     {
