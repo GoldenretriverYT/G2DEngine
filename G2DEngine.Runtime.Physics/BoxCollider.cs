@@ -1,5 +1,6 @@
 ﻿using G2DEngine.Runtime;
 using G2DEngine.Runtime.Utils;
+using Silk.NET.Vulkan;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,13 @@ namespace G2DEngine.Physics
             this.Bounciness = bounciness;
         }
 
-        public override GameObject GetCollision() {
+        public override GameObject GetCollision(Vector2 overridePos = null) {
+            var currentObjectBounds = Transform.Bounds;
+
+            if(overridePos != null) {
+                currentObjectBounds = new SKRect(overridePos.X, overridePos.Y, overridePos.X + Transform.Bounds.Width, overridePos.Y + Transform.Bounds.Height);
+            }
+
             IEnumerable<GameObject> gameObjects = Collider.GetFlattenedGameObjects();
 
             foreach(var obj in gameObjects) {
@@ -29,7 +36,7 @@ namespace G2DEngine.Physics
                 if (obj.TryGetComponent<BoxCollider>(out var otherCollider))
                 {
 
-                    if (CollisionChecker.IsColliding(Transform.Bounds, otherCollider.Transform.Bounds))
+                    if (CollisionChecker.IsColliding(currentObjectBounds, otherCollider.Transform.Bounds))
                     {
                         return otherCollider.GameObject;
                     }

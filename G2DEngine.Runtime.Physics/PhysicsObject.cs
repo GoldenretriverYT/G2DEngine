@@ -99,17 +99,44 @@ namespace G2DEngine.Physics
 
             //ResolveCollision(resolvingDepth+1);
         }
+
+        public bool WouldPositionCollide(Vector2 pos) {
+            if (!GameObject.TryGetComponent<Collider>(out var collider)) {
+                return false;
+            };
+
+            var collision = collider.GetCollision(pos);
+
+            if (collision == null) {
+                return false;
+            }
+
+            return true;
+        }
+
         public override void EarlyUpdate()
         {
             base.EarlyUpdate();
             ApplyForces();
             ResolveCollision();
-
         }
 
         private void ApplyForces()
         {
-            Transform.Position += Velocity * (Time.deltaTime * 100);
+            Vector2 targetPos = Transform.Position;
+            targetPos += new Vector2(Velocity.X * (Time.deltaTime * 100), 0);
+
+            if(!WouldPositionCollide(targetPos)) {
+                Transform.Position = targetPos;
+            }else {
+                targetPos = Transform.Position;
+            }
+
+            targetPos += new Vector2(0, Velocity.Y * (Time.deltaTime * 100));
+
+            if (!WouldPositionCollide(targetPos)) {
+                Transform.Position = targetPos;
+            }
 
             float dividend = Math.Max(1f, (1.001f * (Time.deltaTime * 100)));
             Velocity = new Vector2(Velocity.X / dividend, Velocity.Y / dividend);

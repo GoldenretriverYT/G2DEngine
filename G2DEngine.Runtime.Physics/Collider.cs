@@ -10,7 +10,8 @@ namespace G2DEngine.Physics
 {
     public abstract class Collider : G2DScript
     {
-        public abstract GameObject GetCollision();
+        public abstract GameObject GetCollision(Vector2 overridePos = null);
+
         public float Bounciness { get; set; } = 0.01f;
 
         private static IEnumerable<GameObject> flattenedGameObjects = new List<GameObject>();
